@@ -99,7 +99,7 @@ Params:
 * content: text content (for default effect only)
 * icon: icon name
 
-On mdlButton, if you set an 'href' variable, an link element will be rendered.  If you set a 'for' variable, a label will be rendered, otherwise a button will be rendered.
+On mdlButton, if you set an 'href' variable, a link element will be rendered.  If you set a 'for' variable, a label will be rendered. Otherwise a button will be rendered.
 
 For all of the convenience templates, you can set other variables to have them available on the data object of the template.  It won't affect the DOM.  The template filters out variables that are not standard or data attributes.  For instance, if I need the document '_id' available on 'this' inside of the click handler, I can pass it to the button.
 ```
@@ -146,7 +146,7 @@ Params:
 * toggle: checkbox, radio, icon, switch
 * ripple: true/false
 * label: text content
-* input: serialized JSON
+* input: serialized JSON (attributes for the input element)
 
 mdlToggle passes variables to the input element, just like with mdlTextfield.
 
@@ -157,10 +157,10 @@ If you need to refresh an element from within your JavaScript code, use Material
 var elements = tmpl.$('.mdl-js-tabs');
 Material.refresh(elements);
 ```
-Material.refresh(elements, [delay, component]);
+Material.refresh(elements, [delay, componentName]);
 Params:
 * elements: a jQuery set
 * delay: milliseconds to wait before refreshing
-* component: component name ('e.g. MaterialTabs'), makes the refresh function a bit more efficient
+* componentName: e.g. 'MaterialTabs', makes the refresh function a bit more efficient
 
 Currently, refresh is the only variable on the global Material object.
