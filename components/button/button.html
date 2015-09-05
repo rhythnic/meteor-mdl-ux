@@ -1,0 +1,43 @@
+<template name="mdlButton">
+
+  {{#MaterialButton atts=atts}}
+  
+  {{#with atts}}
+
+  {{#if isLink}}
+  <a {{this}}>
+    {{#if ../icon}}
+      <i class="material-icons">{{../icon}}</i>
+    {{else}}
+      {{../content}}
+    {{/if}}
+  </a>
+  {{else}}
+  
+    {{#if this.for}}
+    <label {{this}}>
+      {{#if ../icon}}
+        <i class="material-icons">{{../icon}}</i>
+      {{else}}
+        {{../content}}
+      {{/if}}
+    </label>
+
+    {{else}}
+
+    <button {{this}}>
+      {{#if ../icon}}
+        <i class="material-icons">{{../icon}}</i>
+      {{else}}
+        {{../content}}
+      {{/if}}
+    </button>
+    {{/if}}
+
+  {{/if}}
+
+  {{/with}}
+
+  {{/MaterialButton}}
+  
+</template>

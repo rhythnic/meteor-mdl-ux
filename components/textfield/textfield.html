@@ -1,0 +1,38 @@
+<template name="mdlTextfield">
+
+  {{#MaterialTextfield atts=atts}}
+  
+  <div {{atts}}>
+
+    {{#with inputAtts}}
+    
+    {{#if ../expandable}}
+
+    {{>mdlButton for=this.id icon=../icon effect="icon"}}
+    <div class="mdl-textfield__expandable-holder">
+      <input {{this}} />
+      <label class="mdl-textfield__label" for="{{this.id}}">{{../label}}</label>
+    </div>
+
+    {{else}}
+
+    {{#if isTextarea}}
+    <textarea {{this}}></textarea>
+    {{else}}
+    <input {{this}} />
+    {{/if}}
+    <label class="mdl-textfield__label" for="{{this.id}}">{{../label}}</label>
+    
+    {{#if ../error}}
+    <span class="mdl-textfield__error">{{../error}}</span>
+    {{/if}}
+
+    {{/if}}
+
+    {{/with}}
+
+  </div>
+
+  {{/MaterialTextfield}}
+
+</template>
