@@ -1,14 +1,17 @@
 #mdl-ux
 Material Design Lite made reactive for Meteor.
 
-##About
+## About ##
+This repo is a [Meteor](https://www.meteor.com/) package that contains templates for using Material Design Lite reactively.
+
+## MDL ##
 [Material Design Lite](http://www.getmdl.io/index.html) (MDL) is a CSS/Javascript framework similar to Bootstrap, but for [Material Design](https://www.google.com/design/spec/material-design/introduction.html).
 
-This repo is a [Meteor](https://www.meteor.com/) package that contains templates for using MDL reactively.  The issue with using MDL in Meteor is that the MDL components are configured on page load, but then they don't adapt to reactive changes in Blaze, Meteor's templating engine.
+The issue with using MDL in Meteor is that the MDL components are configured on page load, but then they don't adapt to reactive changes in Blaze, Meteor's templating engine.
 
 These templates fix that by listening for changes and calling the appropriate methods inside of MDL to re-initialize the component.
 
-##Components
+## Components ##
 MDL consists of many css classes and about a dozen JavaScript components.
 * MaterialLayout
 * MaterialButton
@@ -27,7 +30,7 @@ MDL consists of many css classes and about a dozen JavaScript components.
 
 You can find usage instructions for these components on the [MDL website](http://www.getmdl.io/index.html).
 
-##MDL CSS
+## MDL CSS ##
 This package doesn't link to the MDL css file.  This is so you can choose any theme.  First, link to the CSS file in a head tag.
 ```
 <head>
@@ -36,7 +39,7 @@ This package doesn't link to the MDL css file.  This is so you can choose any th
 ```
 
 
-##Basic Use
+## Basic Use ##
 Write MDL as instructed by the MDL site, and then wrap the HTML with the appropriate template.
 
 ```
@@ -67,7 +70,7 @@ Attach a data context to the template to make it reactive.
 {{/MaterialTabs}}
 ```
 
-##Univeral Refresh Template
+## Univeral Refresh Template ##
 There's a less efficient, but functional univeral template.  This is the same as above, but works with any component.
 The MaterialRefresh template will upgrade only the parent DOM element inside of the template.
 
@@ -77,7 +80,7 @@ The MaterialRefresh template will upgrade only the parent DOM element inside of 
 {{/MaterialRefresh}}
 ```
 
-##Convenience templates
+## Convenience templates ##
 Because writing all of the CSS classes can become a bit much, there are 4 templates that try to reduce that.
 It doesn't make sense to have convenience templates for things like tabs, where a lot of code is custom, but for things like buttons
 it's nice not to have to write the CSS classes all the time.  Those templates are inside of the components folder.
@@ -87,7 +90,7 @@ it's nice not to have to write the CSS classes all the time.  Those templates ar
 * mdlToggle (checkbox, radio, icon-toggle, and switch)
 
 
-###mdlButton
+### mdlButton ###
 ```
 {{> mdlButton effect="miniFab" icon="search" id="search-btn"}}
 ```
@@ -107,7 +110,7 @@ For all of the convenience templates, you can set other variables to have them a
 ```
 
 
-###mdlSpinner
+### mdlSpinner ###
 ```
 {{> mdlSpinner active=true color="single" }}
 ```
@@ -116,7 +119,7 @@ Params:
 * color: single/multi
 
 
-###mdlTextfield
+### mdlTextfield ###
 ```
 {{> mdlTextfield label="Name" floating=true name="name"}}
 ```
@@ -138,7 +141,7 @@ Usually, the input element needs an 'id' attribute to match the 'for' attribute 
 To cause a textarea to be rendered, include a 'rows' variable.  If expandable is set to true, rows will be ignored.
 
 
-###mdlToggle
+### mdlToggle ###
 ```
 {{> mdlToggle toggle="switch" ripple=true label="notifications"}}
 ```
@@ -151,7 +154,7 @@ Params:
 mdlToggle passes variables to the input element, just like with mdlTextfield.
 
 
-##Material.refresh
+## Material.refresh ##
 If you need to refresh an element from within your JavaScript code, use Material.refresh
 ```
 var elements = tmpl.$('.mdl-js-tabs');

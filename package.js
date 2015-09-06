@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'mdl-ux',
+  name: 'rhythnic:mdl-ux',
   version: '0.0.1',
   summary: 'Reactive Templates for Google\'s Material Design Lite',
   git: '',
@@ -33,6 +33,6 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use(['jquery', 'tinytest', 'mdl-ux'], 'client');
+  api.use(['jquery', 'tinytest', 'rhythnic:mdl-ux'], 'client');
   api.addFiles('mdl-ux-tests.js', 'client');
 });
