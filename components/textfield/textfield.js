@@ -9,6 +9,17 @@ function mdlTextfieldClasses(data) {
   return classes;
 }
 
+function getInputData() {
+  this.input = this.input || {};
+  if (typeof this.input === 'string') {
+    this.input = JSON.parse(this.input);
+  }
+  if (!this.input.id) {
+    this.input.id = 'mdl-tf-'+Math.floor(Math.random()*10000);
+  }
+  return this.input;
+}
+
 Template.mdlTextfield.helpers({
   atts: function (){
     var data = Template.currentData() || {};
@@ -18,25 +29,26 @@ Template.mdlTextfield.helpers({
     return atts;
   },
   inputAtts: function () {
-
-    var atts = this.input ? (typeof this.input === 'string' ? JSON.parse(this.input) : this.input) : {};
-
-    // copy input attributes from parent scope
-    _.each(this, function (val, key) {
-      if (!(key in atts)) {
-        atts[key] = val;
-      }
-    }, this);
+    // start with attribute set not used by parent
+    var data = Template.currentData();
+    var atts = Material.filterAtts((data.href ? 'a' : 'div'), data, true);
+    // extend with input-specific attributes
+    _.extend(atts, getInputData.bind(this)());
 
     atts.type = atts.type || 'text';
     atts.class = (atts.class ? atts.class+' ' : '') + 'mdl-textfield__input';
-    atts.id = atts.id || 'mdl-tf-'+Math.floor(Math.random()*5).toString();
 
+    // filter out non-input attributes
     atts = Material.filterAtts(atts.rows ? 'textarea' : 'input', atts);
 
     return atts;
   },
   isTextarea: function () {
-    return this.rows && !Template.parentData(1).expandable;
+    var inputData = getInputData.bind(this)();
+    return (this.rows || inputData.rows) && !this.expandable;
+  },
+  inputId: function () {
+    var inputData = getInputData.bind(this)();
+    return inputData.id;
   }
 });

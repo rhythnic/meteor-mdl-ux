@@ -31,12 +31,17 @@ function getTagAttributes(tag) {
 
 /**
  *  Filter a data object so that it contains only standard attributes for a tag
+ *  if invert is true, result is all attributes that fail
  */
-function filter(tag, data) {
+function filter(tag, data, invert) {
   var stdAtts = getTagAttributes(tag);
   var result = {};
   _.each(data, function (val, key) {
     if (stdAtts.indexOf(key) > -1 || /^data-/.test(key)) {
+      if (!invert) {
+        result[key] = val;
+      }
+    } else if (invert) {
       result[key] = val;
     }
   });

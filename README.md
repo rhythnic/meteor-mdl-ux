@@ -95,12 +95,12 @@ it's nice not to have to write the CSS classes all the time.  Those templates ar
 {{> mdlButton effect="miniFab" icon="search" id="search-btn"}}
 ```
 Params:
-* effect:  default, fab, miniFab, icon
-* ripple: true/false
-* raised: true/false
-* color: primary/accent
-* content: text content (for default effect only)
-* icon: icon name
+* effect:  {string} 'default', 'fab', 'miniFab', 'icon'
+* ripple: {boolean}
+* raised: {boolean}
+* color: {string} 'primary'/'accent'
+* content: {string} text content (for default effect only)
+* icon: {string} icon name
 
 On mdlButton, if you set an 'href' variable, a link element will be rendered.  If you set a 'for' variable, a label will be rendered. Otherwise a button will be rendered.
 
@@ -115,8 +115,8 @@ For all of the convenience templates, you can set other variables to have them a
 {{> mdlSpinner active=true color="single" }}
 ```
 Params:
-* active: true/false
-* color: single/multi
+* active: {boolean}
+* color: {string} 'single'/'multi'
 
 
 ### mdlTextfield ###
@@ -124,10 +124,11 @@ Params:
 {{> mdlTextfield label="Name" floating=true name="name"}}
 ```
 Params:
-* floating: true/false
-* expandable: true/false
-* label: text content
-* input: serialized JSON (attributes for the input element)
+* floating: {boolean}
+* expandable: {boolean}
+* label: {string}
+* input: {object|string} attributes for the input element
+* error: {string} error message (only visible if input is in an invalid state)
 
 On mdlTextfield, any variable set that is not a standard HTML5 global variable will be passed along to the input element.  If the variable is not a valid input attribute, it will be available only on the data object.  If you want to pass a global variable, like id, to the input element, use serialized JSON.
 
@@ -146,10 +147,10 @@ To cause a textarea to be rendered, include a 'rows' variable.  If expandable is
 {{> mdlToggle toggle="switch" ripple=true label="notifications"}}
 ```
 Params:
-* toggle: checkbox, radio, icon, switch
-* ripple: true/false
-* label: text content
-* input: serialized JSON (attributes for the input element)
+* toggle: {string} 'checkbox', 'radio', 'icon', 'switch'
+* ripple: {boolean}
+* label: {string}
+* input: {object|string} attributes for the input element
 
 mdlToggle passes variables to the input element, just like with mdlTextfield.
 
