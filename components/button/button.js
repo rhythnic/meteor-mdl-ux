@@ -32,7 +32,6 @@ function mdlButtonClasses(data) {
 Template.mdlButton.helpers({
   atts: function (){
     var data = Template.currentData() || {};
-    console.log(data);
     var atts = Material.filterAtts(('href' in data ? 'a' : (data.for ? 'label' : 'button')), data);
     atts.class = (atts.class ? [atts.class] : [])
                  .concat(mdlButtonClasses(data)).join(' ');
