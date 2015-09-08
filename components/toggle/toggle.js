@@ -39,7 +39,7 @@ Template.mdlToggle.helpers({
     return atts;
   },
   inputAtts: function () {
-    var atts = this.input ? JSON.parse(this.input) : {};
+    var atts = this.input ? (typeof this.input === 'string' ? JSON.parse(this.input) : this.input) : {};
 
     // copy input attributes from parent scope
     _.each(this, function (val, key) {
