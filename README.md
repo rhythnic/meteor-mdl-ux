@@ -1,4 +1,4 @@
-#mdl-ux
+# mdl-ux #
 Material Design Lite made reactive for Meteor.
 
 ## About ##
