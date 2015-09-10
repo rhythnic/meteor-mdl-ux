@@ -21,12 +21,18 @@ var attributes = {
              'spellcheck', 'wrap']
 };
 
+var booleanAttributes = ['checked', 'selected', 'disabled', 'readonly', 'multiple'];
+
 /**
  * Get standard attributes available for tag
  */
 function getTagAttributes(tag) {
   var tagAtts = attributes[tag] || [];
   return tagAtts.concat(attributes.global);
+}
+
+function isFalseBooleanAttribute(key, val) {
+  return (booleanAttributes.indexOf(key) > -1) && !val;
 }
 
 /**
@@ -38,7 +44,7 @@ function filter(tag, data, invert) {
   var result = {};
   _.each(data, function (val, key) {
     if (stdAtts.indexOf(key) > -1 || /^data-/.test(key)) {
-      if (!invert) {
+      if (!invert && !isFalseBooleanAttribute(key, val)) {
         result[key] = val;
       }
     } else if (invert) {
@@ -48,4 +54,4 @@ function filter(tag, data, invert) {
   return result;
 }
 
-Material.filterAtts = filter;
+MDL.filterAtts = filter;

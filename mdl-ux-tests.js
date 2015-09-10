@@ -7,7 +7,7 @@ Tinytest.add('filter attributes', function (test) {
   test.equal(atts.title, 'My title');
   test.isUndefined(atts.name);
   test.isUndefined(atts.invalidAtt);
-  atts = Attributes.filter('input', data);
+  atts = MDL.filterAtts('input', data);
   test.equal(atts.title, 'My title');
   test.equal(atts.name, 'input name');
   test.isUndefined(atts.invalidAtt);
@@ -18,7 +18,7 @@ Tinytest.add('filter attributes', function (test) {
  */
 Tinytest.add('refresh element', function (test) {
   var el = $(document.createElement('div')).addClass('mdl-js-tabs');
-  Material.refresh(el);
+  MDL.upgrade(el);
   Meteor.setTimeout(function () {
     test.isTrue(el.hasClass('is-upgraded'));
     test.equal(el.data('upgraded'), ',MaterialTabs');

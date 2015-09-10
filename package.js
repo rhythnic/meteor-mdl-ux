@@ -1,6 +1,6 @@
 Package.describe({
   name: 'rhythnic:mdl-ux',
-  version: '0.0.14',
+  version: '0.0.2',
   summary: 'Reactive Templates for Google\'s Material Design Lite',
   git: 'https://github.com/rhythnic/meteor-mdl-ux',
   documentation: 'README.md'
@@ -29,7 +29,7 @@ Package.onUse(function(api) {
     'components/toggle/toggle.html',
     'components/toggle/toggle.js'
   ], 'client');
-  api.export('Material', 'client');
+  api.export('MDL');
 });
 
 Package.onTest(function(api) {

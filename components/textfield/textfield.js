@@ -20,28 +20,33 @@ function getInputData() {
   return this.input;
 }
 
+function getDivAtts (data) {
+  var atts = MDL.filterAtts((data.href ? 'a' : 'div'), data);
+  atts.class = (atts.class ? [atts.class] : [])
+                .concat(mdlTextfieldClasses(data)).join(' ');
+  return atts;
+}
+
+function getInputAtts (data) {
+  var atts = Material.filterAtts((data.href ? 'a' : 'div'), data, true);
+  // extend with input-specific attributes
+  _.extend(atts, getInputData.bind(this)());
+
+  atts.type = atts.type || 'text';
+  atts.class = (atts.class ? atts.class+' ' : '') + 'mdl-textfield__input';
+
+  // filter out non-input attributes
+  atts = Material.filterAtts(atts.rows ? 'textarea' : 'input', atts);
+
+  return atts;
+}
+
 Template.mdlTextfield.helpers({
-  atts: function (){
-    var data = Template.currentData() || {};
-    var atts = Material.filterAtts((data.href ? 'a' : 'div'), data);
-    atts.class = (atts.class ? [atts.class] : [])
-                 .concat(mdlTextfieldClasses(data)).join(' ');
-    return atts;
+  divAtts: function (){
+    return Template.instance().state.get('divAtts');
   },
   inputAtts: function () {
-    // start with attribute set not used by parent
-    var data = Template.currentData();
-    var atts = Material.filterAtts((data.href ? 'a' : 'div'), data, true);
-    // extend with input-specific attributes
-    _.extend(atts, getInputData.bind(this)());
-
-    atts.type = atts.type || 'text';
-    atts.class = (atts.class ? atts.class+' ' : '') + 'mdl-textfield__input';
-
-    // filter out non-input attributes
-    atts = Material.filterAtts(atts.rows ? 'textarea' : 'input', atts);
-
-    return atts;
+    return Template.instance().state.get('inputAtts');
   },
   isTextarea: function () {
     var inputData = getInputData.bind(this)();
@@ -52,3 +57,22 @@ Template.mdlTextfield.helpers({
     return inputData.id;
   }
 });
+
+
+Template.mdlTextfield.created = function () {
+  var tmpl = this;
+  tmpl.state = new ReactiveDict();
+  tmpl.autorun(function () {
+
+    var data = Template.currentData();
+    tmpl.state.set('divAtts', getDivAtts(data));
+
+    var inputAtts = getInputAtts(data);
+    tmpl.state.set('inputAtts', inputAtts);
+
+    if (!tmpl.lastNode) return;
+
+    var elem = tmpl.$('div')[0];
+    elem.MaterialTextfield[inputAtts.disabled ? 'disable' : 'enable']();
+  });
+};

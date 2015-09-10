@@ -32,7 +32,7 @@ function mdlButtonClasses(data) {
 Template.mdlButton.helpers({
   atts: function (){
     var data = Template.currentData() || {};
-    var atts = Material.filterAtts(('href' in data ? 'a' : (data.for ? 'label' : 'button')), data);
+    var atts = MDL.filterAtts(('href' in data ? 'a' : (data.for ? 'label' : 'button')), data);
     atts.class = (atts.class ? [atts.class] : [])
                  .concat(mdlButtonClasses(data)).join(' ');
     return atts;
@@ -41,5 +41,15 @@ Template.mdlButton.helpers({
     return 'href' in this;
   }
 });
+
+Template.mdlButton.created = function () {
+  var tmpl = this;
+  tmpl.autorun(function () {
+    var data = Template.currentData() || {};
+    if (!tmpl.lastNode) return;
+    var elem = tmpl.$(data.href ? 'a' : data.for ? 'label' : 'button')[0];
+    elem.MaterialButton[data.disabled ? 'disable' : 'enable']();
+  });
+};
 
 

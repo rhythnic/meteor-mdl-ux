@@ -1,8 +1,8 @@
 <template name="mdlToggle">
 
-  {{#MaterialRefresh data=this}}
+  {{#MDL data=this}}
 
-  <label {{atts}}>
+  <label {{labelAtts}}>
     <input {{inputAtts}}>
     {{#if icon}}
     <i class="mdl-icon-toggle__label material-icons">{{icon}}</i>
@@ -11,6 +11,6 @@
     {{/if}}
   </label>
 
-  {{/MaterialRefresh}}
+  {{/MDL}}
 
 </template>

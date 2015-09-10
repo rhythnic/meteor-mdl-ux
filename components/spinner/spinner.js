@@ -13,7 +13,7 @@ function mdlSpinnerClasses(data) {
 Template.mdlSpinner.helpers({
   atts: function (){
     var data = Template.currentData() || {};
-    var atts = Material.filterAtts('div', data);
+    var atts = MDL.filterAtts('div', data);
     atts.class = (atts.class ? [atts.class] : [])
                  .concat(mdlSpinnerClasses(data)).join(' ');
     return atts;

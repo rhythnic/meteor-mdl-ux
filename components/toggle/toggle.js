@@ -30,33 +30,76 @@ var labelClass = {
   'switch': 'mdl-switch__label'
 };
 
+function getLabelAtts(data) {
+  var atts = MDL.filterAtts('label', data);
+  atts.class = (atts.class ? [atts.class] : [])
+               .concat(mdlToggleClasses(data)).join(' ');
+  return atts;
+}
+
+function getInputAtts(data) {
+  //input atts
+  var atts = data.input ? (typeof data.input === 'string' ? JSON.parse(data.input) : data.input) : {};
+
+  // copy input attributes from parent scope
+  _.each(data, function (val, key) {
+    if (!(key in atts) && key !== 'input'){
+      atts[key] = val;
+    }
+  });
+
+  atts.type = data.toggle === 'radio' ? 'radio' : 'checkbox';
+  atts.class = (atts.class ? atts.class+' ' : '') + (inputClass[data.toggle] || 'mdl-checkbox__input');
+  atts.id = atts.id || 'mdl-tgl-'+Math.floor(Math.random()*5).toString();
+
+  atts = MDL.filterAtts('input', atts);
+  return atts;
+}
+
 Template.mdlToggle.helpers({
-  atts: function (){
-    var data = Template.currentData() || {};
-    var atts = Material.filterAtts('label', data);
-    atts.class = (atts.class ? [atts.class] : [])
-                 .concat(mdlToggleClasses(data)).join(' ');
-    return atts;
+  labelAtts: function (){
+    return Template.instance().state.get('labelAtts');
   },
   inputAtts: function () {
-    var atts = this.input ? (typeof this.input === 'string' ? JSON.parse(this.input) : this.input) : {};
-
-    // copy input attributes from parent scope
-    _.each(this, function (val, key) {
-      if (!(key in atts)) {
-        atts[key] = val;
-      }
-    }, this);
-
-    atts.type = this.toggle === 'radio' ? 'radio' : 'checkbox';
-    atts.class = (atts.class ? atts.class+' ' : '') + (inputClass[this.toggle] || 'mdl-checkbox__input');
-    atts.id = atts.id || 'mdl-tgl-'+Math.floor(Math.random()*5).toString();
-
-    atts = Material.filterAtts('input', atts);
-
-    return atts;
+    return Template.instance().state.get('inputAtts');
   },
   labelClass: function () {
     return labelClass[this.toggle] || 'mdl-checkbox__label';
   }
 });
+
+Template.mdlToggle.created = function () {
+  var tmpl = this;
+  tmpl.state = new ReactiveDict();
+  tmpl.autorun(function () {
+    // atts
+    var data = Template.currentData();
+    tmpl.state.set('labelAtts', getLabelAtts(data));
+
+    var inputAtts = getInputAtts(data);
+    tmpl.state.set('inputAtts', inputAtts);
+
+
+    if (!tmpl.lastNode) return;
+
+    var elem = tmpl.$('label')[0];
+
+    switch(data.toggle) {
+      case 'radio':
+        elem.MaterialRadio['disabled' in inputAtts ? 'disable' : 'enable']();
+        elem.MaterialRadio['checked' in inputAtts ? 'check' : 'uncheck']();
+        break;
+      case 'switch':
+        elem.MaterialSwitch['checked' in inputAtts ? 'disable' : 'enable']();
+        elem.MaterialSwitch['checked' in inputAtts ? 'on' : 'off']();
+        break;
+      case 'icon':
+        elem.MaterialIconToggle['disabled' in inputAtts ? 'disable' : 'enable']();
+        elem.MaterialIconToggle['disabled' in inputAtts ? 'check' : 'uncheck']();
+        break;
+      default:
+        elem.MaterialCheckbox['disabled' in inputAtts ? 'disable' : 'enable']();
+        elem.MaterialCheckbox['disabled' in inputAtts ? 'check' : 'uncheck']();
+    }
+  });
+};
