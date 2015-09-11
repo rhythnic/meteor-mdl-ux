@@ -28,7 +28,7 @@ function getDivAtts (data) {
 }
 
 function getInputAtts (data) {
-  var atts = Material.filterAtts((data.href ? 'a' : 'div'), data, true);
+  var atts = MDL.filterAtts((data.href ? 'a' : 'div'), data, true);
   // extend with input-specific attributes
   _.extend(atts, getInputData.bind(this)());
 
@@ -36,7 +36,7 @@ function getInputAtts (data) {
   atts.class = (atts.class ? atts.class+' ' : '') + 'mdl-textfield__input';
 
   // filter out non-input attributes
-  atts = Material.filterAtts(atts.rows ? 'textarea' : 'input', atts);
+  atts = MDL.filterAtts(atts.rows ? 'textarea' : 'input', atts);
 
   return atts;
 }
