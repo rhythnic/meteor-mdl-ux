@@ -90,16 +90,16 @@ Template.mdlToggle.created = function () {
         elem.MaterialRadio['checked' in inputAtts ? 'check' : 'uncheck']();
         break;
       case 'switch':
-        elem.MaterialSwitch['checked' in inputAtts ? 'disable' : 'enable']();
+        elem.MaterialSwitch['disabled' in inputAtts ? 'disable' : 'enable']();
         elem.MaterialSwitch['checked' in inputAtts ? 'on' : 'off']();
         break;
       case 'icon':
         elem.MaterialIconToggle['disabled' in inputAtts ? 'disable' : 'enable']();
-        elem.MaterialIconToggle['disabled' in inputAtts ? 'check' : 'uncheck']();
+        elem.MaterialIconToggle['checked' in inputAtts ? 'check' : 'uncheck']();
         break;
       default:
         elem.MaterialCheckbox['disabled' in inputAtts ? 'disable' : 'enable']();
-        elem.MaterialCheckbox['disabled' in inputAtts ? 'check' : 'uncheck']();
+        elem.MaterialCheckbox['checked' in inputAtts ? 'check' : 'uncheck']();
     }
   });
 };
