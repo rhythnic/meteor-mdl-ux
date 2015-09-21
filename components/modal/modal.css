@@ -1,0 +1,57 @@
+.mdl-modal {
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  top: -50%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  pointer-events: none;
+  -webkit-transition: 0.2s all ease;
+          transition: 0.2s all ease;
+}
+
+.mdl-modal.is-visible {
+  pointer-events: auto;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  top: 0;
+}
+
+.mdl-modal__content {
+  width: 90%;
+  max-width: 800px;
+  padding: 1em;
+  background: white;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.mdl-modal__button-bar {
+  margin-top: 2em;
+}
+
+.mdl-modal__close-btn {
+  position: absolute !important;
+  top: -8px;
+  right: -8px;
+}
+
+.mdl-modal__cancel-btn {
+  margin-right: 1em;
+}
+
+.mdl-modal__message {
+  font-size: 20px;
+  margin: 0 1em 0 0;
+}
+
+.mdl-modal.is-error .mdl-modal__message {
+  color: #D74048;
+}

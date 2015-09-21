@@ -42,7 +42,7 @@ function isFalseBooleanAttribute(key, val) {
 function filter(tag, data, invert) {
   var stdAtts = getTagAttributes(tag);
   var result = {};
-  _.each(data, function (val, key) {
+  _.each((data || {}), function (val, key) {
     if (stdAtts.indexOf(key) > -1 || /^data-/.test(key)) {
       if (!invert && !isFalseBooleanAttribute(key, val)) {
         result[key] = val;

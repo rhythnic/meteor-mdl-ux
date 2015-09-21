@@ -123,3 +123,33 @@ In the event that you can't use the template wrapper, you can call the MDL.upgra
 var elements = tmpl.$('mdl-checkbox');
 MDL.upgrade(elements);
 ```
+
+
+### mdlModal ###
+mdlModal is not part of the core of MDL, but it's something added to this package.  mdlModal consists of a global template and methods for manipulating it.
+
+#### template ####
+Put the template high enough in the template stack so that it's size won't be constrained.
+```
+<main class="mdl-layout__content">
+  {{> yield}}
+  {{> mdlModal}}
+</main>
+```
+
+#### MDL.modal ####
+There are 3 methods on MDL.modal.
+* MDL.modal.set()
+* MDL.modal.show()
+* MDL.modal.hide()
+
+The show and hide methods don't take any parameters.  The set method will reconfigure the modal.  Set will also show the modal by default, unless you set show to false in the options.
+
+MDL.set parameters:
+* error {string} : error message, overrides message option
+* message {string} : message to display
+* onConfirm: {Function} : confirm callback, setting this option will cause "Cancel" and "Confirm" buttons show on the bottom of the modal
+* template {string} : name of template to display inside of the modal.  template is overridden by the message and error options.
+* templateData {Object}: data context for template option
+* show {boolean}: show the modal, defualt is false
+

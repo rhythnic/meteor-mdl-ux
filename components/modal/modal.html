@@ -1,0 +1,27 @@
+<template name="mdlModal">
+  <div {{atts}}>
+    <div class="mdl-modal__content">
+
+    {{#if message}}
+    <p class="mdl-modal__message">{{message}}</p>
+    {{else}}
+    {{#if template}}
+    {{#if templateData}}
+    {{>Template.dynamic template=template data=templateData}}
+    {{else}}
+    {{>Template.dynamic template=template}}
+    {{/if}}
+    {{/if}}
+    {{/if}}
+
+    {{#if confirm}}
+    <div class="mdl-modal__button-bar">
+      {{>mdlButton class="mdl-modal__cancel-btn" raised=true content="Cancel"}}
+      {{>mdlButton class="mdl-modal__confirm-btn" raised=true content="Confirm" color="primary"}}
+    </div>
+    {{/if}}
+
+    {{>mdlButton class="mdl-modal__close-btn" effect="miniFab" icon="clear" color="primary"}}
+    </div>
+  </div>
+</template>
