@@ -13,10 +13,12 @@ The second advantage is the convenience templates, which help reduce code size. 
 You can find usage instructions for MDL components on the [MDL website](http://www.getmdl.io/index.html).
 
 ## MDL CSS ##
-This package doesn't link to the MDL css file.  This is so you can choose any theme.  First, link to the CSS file in a head tag.
+This package doesn't link to the MDL css file.  This is so you can choose any theme.  First, link to the MDL files in a head tag.
 ```
 <head>
-  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue_grey-blue.min.css" />
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+  <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 ```
 
